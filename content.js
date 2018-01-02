@@ -4,14 +4,16 @@
   }
   window.hasRun = true;
 
-  function insertBeast(beastURL) {
-    removeExistingBeasts();
-    let beastImage = document.createElement('img');
-    beastImage.setAttribute('src', beastURL);
-    beastImage.style.height = '100vh';
-    beastImage.className = 'beastify-image';
-    document.body.appendChild(beastImage);
-  }
+  const modal = document.createRange().createContextualFragment(`
+  <div class="modal-fixer hidden" id="ch-modal-fixer">
+    <div class="modal">
+      <div class="modal-content" id="ch-modal-content">
+        <p>U BITCH</p>
+      </div>
+    </div>
+  </div>
+  `);
+  document.body.appendChild(modal);
 
   browser.runtime.onMessage.addListener(message => {
     if (message.command === 'show') {
@@ -20,8 +22,12 @@
     }
   });
 
-  show = (html) => {
-    alert(html);
+  const show = html => {
+    console.log(html);
+    document.getElementById('ch-modal-content').innerHTML = `<span>${html}</span>`;
+    const fixer = document.getElementById('ch-modal-fixer');
+    fixer.classList.remove('hidden');
+    fixer.addEventListener('click', () => {fixer.classList.add('hidden')});
   };
 
   console && console.log('loaded');

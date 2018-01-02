@@ -2,8 +2,7 @@
   "manifest_version": 2,
   "name": "Cambridge Here",
   "version": "1.0",
-  "description":
-    "Show Cambridge Dictionary word definition right here.",
+  "description": "Show Cambridge Dictionary word definition right here.",
   "icons": {
     "48": "icons/cam-48.png"
   },
@@ -11,7 +10,8 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "js": ["content.js"],
+      "css": ["content.css"]
     }
   ],
   "background": {

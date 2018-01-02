@@ -18,14 +18,16 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
     console.log(info.selectionText);
     browser.tabs
       .query({ active: true, currentWindow: true })
-      .then(sendShowDictionary)
+      .then(tabs=>sendShowDictionary(tabs, info.selectionText))
       .catch(reportError);
   }
 });
 
-sendShowDictionary = tabs => {
+const sendShowDictionary = (tabs, selected) => {
   browser.tabs.sendMessage(tabs[0].id, {
     command: 'show',
-    html: '<p>bullshit crap hooray</p>'
+    html: selected
   });
 };
+
+const reportError = (e) => console.log(e);
